@@ -16,7 +16,6 @@ jobs:
       markdown_change: ${{ steps.filter_markdown.outputs.change }}
       markdown_files: ${{ steps.filter_markdown.outputs.change_files }}
     steps:
-
       - name: Check Not Allowed File Changes
         uses: dorny/paths-filter@v2
         id: filter_not_allowed
@@ -65,7 +64,6 @@ jobs:
             change:
               - added|modified: '*.md'
 
-
   job2:
     name: Lint Markdown
     runs-on: ubuntu-latest
@@ -73,7 +71,7 @@ jobs:
     if: ${{ always() && needs.job1.outputs.markdown_change == 'true' }}
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
