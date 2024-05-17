@@ -38,7 +38,7 @@
     "axios": "^1.6.8",
     "classnames": "^2.5.1",
     "cross-env": "^7.0.3",
-    "electron": "^22.3.27",
+    "electron": "^29",
     "electron-builder": "^24.13.3",
     "eslint": "^8.57.0",
     "eslint-config-xx": "^1.10.1",

@@ -1,8 +1,8 @@
 import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Input, Button, Row, message } from 'antd';
-// import { UserOutlined, LockOutlined, SafetyOutlined } from "@ant-design/icons";
-import FE from '@/assets/FE.png';
+import { UserOutlined, LockOutlined, SafetyOutlined } from '@ant-design/icons';
+// import FE from '@/assets/FE.png';
 
 import styles from './login.module.scss';
 
@@ -61,7 +61,7 @@ const Login = () => {
     <div className={styles.login}>
       <div className={styles.content}>
         <div className={styles['content-left']}>
-          <img src={FE} alt="fe" className={styles.logo} />
+          {/* <img src={FE} alt="fe" className={styles.logo} /> */}
         </div>
         <div className={styles['content-right']}>
           <h2>用户登录</h2>
