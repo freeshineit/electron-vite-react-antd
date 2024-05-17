@@ -1,10 +1,10 @@
-import { useEffect } from "react";
-import { Outlet } from "react-router-dom";
-import style from "./index.module.scss";
+import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
+import style from './index.module.scss';
 // import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // import { fetchMeSync, selectMe } from "@/store/features/me-slice";
 // import { ResponseStatus } from "@/constant";
-import Header from "./Header";
+import Header from './Header';
 // import Footer from "./Footer";
 
 const Layout = () => {
@@ -33,7 +33,7 @@ const Layout = () => {
   //   }
 
   return (
-    <div className={style["center"]}>
+    <div className={style['center']}>
       <Header />
       <main className="_main">
         <Outlet />

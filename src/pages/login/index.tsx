@@ -1,16 +1,16 @@
-import { useEffect, useState, useCallback } from "react";
-import { Link } from "react-router-dom";
-import { Form, Input, Button, Row, message } from "antd";
+import { useEffect, useState, useCallback } from 'react';
+import { Link } from 'react-router-dom';
+import { Form, Input, Button, Row, message } from 'antd';
 // import { UserOutlined, LockOutlined, SafetyOutlined } from "@ant-design/icons";
-import FE from "@/assets/FE.png";
+import FE from '@/assets/FE.png';
 
-import styles from "./login.module.scss";
+import styles from './login.module.scss';
 
 const Login = () => {
   //   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [codeImg, setCodeImg] = useState("");
-  const [captchaID, setCaptchaID] = useState("");
+  const [codeImg, setCodeImg] = useState('');
+  const [captchaID, setCaptchaID] = useState('');
 
   const handleCaptcha = useCallback(() => {
     // getCaptcha()
@@ -54,39 +54,28 @@ const Login = () => {
       //       handleCaptcha();
       //     });
     },
-    [captchaID, handleCaptcha]
+    [captchaID, handleCaptcha],
   );
 
   return (
     <div className={styles.login}>
       <div className={styles.content}>
-        <div className={styles["content-left"]}>
+        <div className={styles['content-left']}>
           <img src={FE} alt="fe" className={styles.logo} />
         </div>
-        <div className={styles["content-right"]}>
+        <div className={styles['content-right']}>
           <h2>用户登录</h2>
-          <Form
-            name="login"
-            initialValues={{ remember: true }}
-            onFinish={onFinish}
-          >
+          <Form name="login" initialValues={{ remember: true }} onFinish={onFinish}>
             <Form.Item
               name="email"
               rules={[
-                { required: true, message: "请输入邮箱!" },
-                { type: "email", message: "请输入有效邮箱!" },
+                { required: true, message: '请输入邮箱!' },
+                { type: 'email', message: '请输入有效邮箱!' },
               ]}
             >
-              <Input
-                prefix={<UserOutlined rev={undefined} />}
-                placeholder="邮箱"
-                size="large"
-              />
+              <Input prefix={<UserOutlined rev={undefined} />} placeholder="邮箱" size="large" />
             </Form.Item>
-            <Form.Item
-              name="password"
-              rules={[{ required: true, message: "请输入密码!" }]}
-            >
+            <Form.Item name="password" rules={[{ required: true, message: '请输入密码!' }]}>
               <Input.Password
                 prefix={<LockOutlined rev={undefined} />}
                 size="large"
@@ -101,7 +90,7 @@ const Login = () => {
                   rules={[
                     {
                       required: true,
-                      message: "请输入验证码!",
+                      message: '请输入验证码!',
                     },
                   ]}
                 >
@@ -111,25 +100,17 @@ const Login = () => {
                     prefix={<SafetyOutlined rev={undefined} />}
                   />
                 </Form.Item>
-                <div className={styles["code-wrapper"]}>
-                  {!!codeImg && (
-                    <img src={codeImg} alt="验证码" onClick={handleCaptcha} />
-                  )}
+                <div className={styles['code-wrapper']}>
+                  {!!codeImg && <img src={codeImg} alt="验证码" onClick={handleCaptcha} />}
                 </div>
               </Row>
             </Form.Item>
 
-            <div style={{ textAlign: "right", paddingBottom: "10px" }}>
+            <div style={{ textAlign: 'right', paddingBottom: '10px' }}>
               <Link to="/register">register</Link>
             </div>
             <Form.Item>
-              <Button
-                type="primary"
-                htmlType="submit"
-                size="large"
-                block
-                loading={loading}
-              >
+              <Button type="primary" htmlType="submit" size="large" block loading={loading}>
                 登录
               </Button>
             </Form.Item>

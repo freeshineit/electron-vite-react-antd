@@ -1,32 +1,32 @@
-import React from "react";
-import { createBrowserRouter } from "react-router-dom";
+import React from 'react';
+import { createBrowserRouter } from 'react-router-dom';
 
 // layout
-import Layout from "@/components/Layout";
+import Layout from '@/components/Layout';
 
 // page
 // import Home from '@/page/home/home'
-const Home = React.lazy(async () => await import("@/pages/home"));
-const Login = React.lazy(async () => await import("@/pages/login"));
-const Register = React.lazy(async () => await import("@/pages/register"));
+const Home = React.lazy(async () => await import('@/pages/home'));
+const Login = React.lazy(async () => await import('@/pages/login'));
+const Register = React.lazy(async () => await import('@/pages/register'));
 
 // ------------------ auth page ---------------------------
-const Profile = React.lazy(async () => await import("@/pages/profile"));
+const Profile = React.lazy(async () => await import('@/pages/profile'));
 // ------------------ end auth page -----------------------
 // end page
 
 export const router = createBrowserRouter(
   [
     {
-      path: "/login",
+      path: '/login',
       element: <Login />,
     },
     {
-      path: "/register",
+      path: '/register',
       element: <Register />,
     },
     {
-      path: "/",
+      path: '/',
       element: <Layout />,
       children: [
         {
@@ -52,6 +52,6 @@ export const router = createBrowserRouter(
     // },
   ],
   {
-    basename: "/",
-  }
+    basename: '/',
+  },
 );

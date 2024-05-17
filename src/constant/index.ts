@@ -1,4 +1,4 @@
 const ENV_CONFIG = {
-  storePath: "",
-  loggerPath: "",
+  storePath: '',
+  loggerPath: '',
 };
