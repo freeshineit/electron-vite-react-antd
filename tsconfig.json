@@ -20,6 +20,9 @@
       "@/*": ["src/*"]
     }
   },
+  "ts-node": {
+    "esm": true
+  },
   "include": ["src", "electron"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
