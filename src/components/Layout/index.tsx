@@ -34,9 +34,9 @@ const Layout = () => {
 
   return (
     <div className={cls(style.layout, '__layout')}>
-      <Footer />
       <Header />
       <Content />
+      <Footer />
     </div>
   );
 };
