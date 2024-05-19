@@ -11,7 +11,7 @@ const Login = React.lazy(async () => await import('@/pages/login'));
 const Register = React.lazy(async () => await import('@/pages/register'));
 
 // ------------------ auth page ---------------------------
-const Profile = React.lazy(async () => await import('@/pages/profile'));
+// const Profile = React.lazy(async () => await import('@/pages/profile'));
 // ------------------ end auth page -----------------------
 // end page
 

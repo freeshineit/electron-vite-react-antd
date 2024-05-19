@@ -11,8 +11,7 @@ import { RouterProvider } from 'react-router-dom';
 import Loading from '@/components/common/Loading';
 // import { store } from "./store";
 import { router } from './router';
-
-import './index.scss';
+import './styles/common.scss';
 
 /** global logger */
 // window.logger = logger;

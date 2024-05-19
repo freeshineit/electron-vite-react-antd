@@ -1,8 +1,12 @@
 import { Link } from 'react-router-dom';
+import cls from 'classnames'
+
+import style from './Header.module.scss'
+
 const Header = () => {
   return (
-    <div>
-      <Link to="/home">Home</Link>
+    <div className={cls(style.header, "__header")}>
+      <Link to="/">Home Page</Link>
     </div>
   );
 };

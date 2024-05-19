@@ -1,13 +1,11 @@
 // import { useEffect } from 'react';
+import { Outlet } from 'react-router-dom';
 import cls from 'classnames';
 import style from './index.module.scss';
 // import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // import { fetchMeSync, selectMe } from "@/redux/features/me-slice";
-import Header from './Header';
-import Content from './Main';
-import Footer from './Footer';
 
-const Layout = () => {
+const Main = () => {
   //   const dispatch = useAppDispatch();
   //   const me = useAppSelector(selectMe);
 
@@ -33,12 +31,10 @@ const Layout = () => {
   //   }
 
   return (
-    <div className={cls(style.layout, '__layout')}>
-      <Footer />
-      <Header />
-      <Content />
-    </div>
+    <main className={cls(style.main, '__main')}>
+      <Outlet />
+    </main>
   );
 };
 
-export default Layout;
+export default Main;

@@ -108,6 +108,9 @@ const Login = () => {
 
             <div style={{ textAlign: 'right', paddingBottom: '10px' }}>
               <Link to="/register">register</Link>
+              &nbsp;
+              &nbsp;
+              <Link to="/">home</Link>
             </div>
             <Form.Item>
               <Button type="primary" htmlType="submit" size="large" block loading={loading}>
