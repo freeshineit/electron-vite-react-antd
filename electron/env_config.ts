@@ -2,6 +2,8 @@
  * 环境配置
  */
 export const ENV_CONFIG = {
-  storePath: '',
-  loggerPath: '',
+  DBConfig: {
+    path: 'db.db',
+  },
+  loggerConfig: {},
 };

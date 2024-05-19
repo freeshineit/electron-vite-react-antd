@@ -1,11 +1,15 @@
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
-import { createRequire } from 'node:module';
-import { fileURLToPath } from 'node:url';
-import path from 'node:path';
-import os from 'node:os';
+import { createRequire } from 'module';
+import { fileURLToPath } from 'url';
+import path from 'path';
+import os from 'os';
 import { update } from './update';
+import Database from '../db';
 
+// 下面两行有用 不要删除
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const require = createRequire(import.meta.url);
+// eslint-disable-next-line @typescript-eslint/naming-convention
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // The built directory structure
@@ -82,11 +86,25 @@ async function createWindow() {
   update(win);
 }
 
-app.whenReady().then(createWindow);
+app.whenReady().then(async () => {
+  createWindow();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const
+  let db = new Database();
+
+  await db.createTable(`
+  CREATE TABLE IF NOT EXISTS user (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT,
+    age INTEGER
+  )
+  `);
+});
 
 app.on('window-all-closed', () => {
   win = null;
-  if (process.platform !== 'darwin') app.quit();
+  if (process.platform !== 'darwin') {
+    app.quit();
+  }
 });
 
 app.on('second-instance', () => {

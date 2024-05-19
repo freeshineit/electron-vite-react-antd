@@ -23,7 +23,8 @@
     "fmt": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss,cjs}\""
   },
   "dependencies": {
-    "electron-updater": "^6.1.8"
+    "electron-updater": "^6.1.8",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "@ant-design/icons": "^5.3.6",
@@ -42,7 +43,6 @@
     "eslint": "^8.57.0",
     "eslint-config-xx": "^1.10.1",
     "immer": "^10.0.4",
-    "lowdb": "^7.0.1",
     "only-allow": "^1.2.1",
     "postcss": "^8.4.38",
     "postcss-import": "^16.1.0",
