@@ -13,16 +13,7 @@ const ModalTemplate: React.FC<
     width?: number;
   }>
 > = (props) => {
-  const {
-    title,
-    children,
-    footer,
-    cancelText = 'Cancel',
-    okText = 'OK',
-    onCancel,
-    onOk,
-    width = 530,
-  } = props;
+  const { title, children, footer, cancelText = 'Cancel', okText = 'OK', onCancel, onOk, width = 530 } = props;
 
   return (
     <div className="update-modal">

@@ -60,9 +60,7 @@ const Login = () => {
   return (
     <div className={styles.login}>
       <div className={styles.content}>
-        <div className={styles['content-left']}>
-          {/* <img src={FE} alt="fe" className={styles.logo} /> */}
-        </div>
+        <div className={styles['content-left']}>{/* <img src={FE} alt="fe" className={styles.logo} /> */}</div>
         <div className={styles['content-right']}>
           <h2>用户登录</h2>
           <Form name="login" initialValues={{ remember: true }} onFinish={onFinish}>
@@ -76,11 +74,7 @@ const Login = () => {
               <Input prefix={<UserOutlined rev={undefined} />} placeholder="邮箱" size="large" />
             </Form.Item>
             <Form.Item name="password" rules={[{ required: true, message: '请输入密码!' }]}>
-              <Input.Password
-                prefix={<LockOutlined rev={undefined} />}
-                size="large"
-                placeholder="密码"
-              />
+              <Input.Password prefix={<LockOutlined rev={undefined} />} size="large" placeholder="密码" />
             </Form.Item>
             <Form.Item className={styles.captcha}>
               <Row justify="space-between">
@@ -94,11 +88,7 @@ const Login = () => {
                     },
                   ]}
                 >
-                  <Input
-                    size="large"
-                    placeholder="验证码"
-                    prefix={<SafetyOutlined rev={undefined} />}
-                  />
+                  <Input size="large" placeholder="验证码" prefix={<SafetyOutlined rev={undefined} />} />
                 </Form.Item>
                 <div className={styles['code-wrapper']}>
                   {!!codeImg && <img src={codeImg} alt="验证码" onClick={handleCaptcha} />}
@@ -108,8 +98,7 @@ const Login = () => {
 
             <div style={{ textAlign: 'right', paddingBottom: '10px' }}>
               <Link to="/register">register</Link>
-              &nbsp;
-              &nbsp;
+              &nbsp; &nbsp;
               <Link to="/">home</Link>
             </div>
             <Form.Item>

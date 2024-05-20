@@ -53,10 +53,7 @@ const Register = () => {
           <Form.Item name="password" rules={[{ required: true, message: '请输入密码!' }]}>
             <Input.Password size="large" placeholder="密码" />
           </Form.Item>
-          <Form.Item
-            name="confirm_password"
-            rules={[{ required: true, message: '请输入确认密码!' }]}
-          >
+          <Form.Item name="confirm_password" rules={[{ required: true, message: '请输入确认密码!' }]}>
             <Input.Password size="large" placeholder="确认密码" />
           </Form.Item>
 

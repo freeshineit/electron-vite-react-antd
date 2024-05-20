@@ -36,37 +36,31 @@ const Update = () => {
     }
   };
 
-  const onUpdateCanAvailable = useCallback(
-    (_event: Electron.IpcRendererEvent, arg1: VersionInfo) => {
-      setVersionInfo(arg1);
-      setUpdateError(undefined);
-      // Can be update
-      if (arg1.update) {
-        setModalBtn((state) => ({
-          ...state,
-          cancelText: 'Cancel',
-          okText: 'Update',
-          onOk: () => window.ipcRenderer.invoke('start-download'),
-        }));
-        setUpdateAvailable(true);
-      } else {
-        setUpdateAvailable(false);
-      }
-    },
-    [],
-  );
+  const onUpdateCanAvailable = useCallback((_event: Electron.IpcRendererEvent, arg1: VersionInfo) => {
+    setVersionInfo(arg1);
+    setUpdateError(undefined);
+    // Can be update
+    if (arg1.update) {
+      setModalBtn((state) => ({
+        ...state,
+        cancelText: 'Cancel',
+        okText: 'Update',
+        onOk: () => window.ipcRenderer.invoke('start-download'),
+      }));
+      setUpdateAvailable(true);
+    } else {
+      setUpdateAvailable(false);
+    }
+  }, []);
 
   const onUpdateError = useCallback((_event: Electron.IpcRendererEvent, arg1: ErrorType) => {
     setUpdateAvailable(false);
     setUpdateError(arg1);
   }, []);
 
-  const onDownloadProgress = useCallback(
-    (_event: Electron.IpcRendererEvent, arg1: ProgressInfo) => {
-      setProgressInfo(arg1);
-    },
-    [],
-  );
+  const onDownloadProgress = useCallback((_event: Electron.IpcRendererEvent, arg1: ProgressInfo) => {
+    setProgressInfo(arg1);
+  }, []);
 
   const onUpdateDownloaded = useCallback((_event: Electron.IpcRendererEvent, ...args: any[]) => {
     setProgressInfo({ percent: 100 });

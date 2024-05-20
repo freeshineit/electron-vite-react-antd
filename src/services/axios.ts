@@ -2,11 +2,7 @@
  * axios封装
  * 请求拦截、相应拦截、错误统一处理
  */
-import axios, {
-  type AxiosRequestConfig,
-  type AxiosResponse,
-  type InternalAxiosRequestConfig,
-} from 'axios';
+import axios, { type AxiosRequestConfig, type AxiosResponse, type InternalAxiosRequestConfig } from 'axios';
 // import { getToken, removeToken } from '@/utils/auth';
 
 /**
@@ -96,9 +92,7 @@ instance.interceptors.response.use(
  * @returns Promise
  */
 async function Axios<T = unknown>(configParam: AxiosRequestConfig): Promise<Response<T>> {
-  return await instance
-    .request<Response<T>, AxiosResponse<Response<T>>>(configParam)
-    .then((res) => res.data);
+  return await instance.request<Response<T>, AxiosResponse<Response<T>>>(configParam).then((res) => res.data);
 }
 
 export default Axios;

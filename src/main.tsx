@@ -4,7 +4,6 @@ import './demos/ipc';
 
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-// import { ConfigProvider } from "antd";
 import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { Provider } from 'react-redux';
