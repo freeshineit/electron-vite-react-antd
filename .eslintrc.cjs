@@ -4,13 +4,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
-    project: [
-      'tsconfig.json',
-      'tsconfig.node.json',
-      'jest.config.ts',
-      'vite.config.ts',
-      'vitest.setup.ts',
-    ],
+    project: ['tsconfig.json', 'tsconfig.node.json', 'jest.config.ts', 'vite.config.ts', 'vitest.setup.ts'],
   },
   globals: {
     logger: true,
