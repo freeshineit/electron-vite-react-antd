@@ -5,7 +5,8 @@ import { fileURLToPath } from 'url';
 import path from 'path';
 import os from 'os';
 import { update } from './update';
-import Database from '../db';
+import Sql from '../sql';
+import IPC from '../ipc';
 import { ENV_CONFIG } from '../env_config';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
@@ -46,6 +47,8 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 let win: BrowserWindow | null = null;
+let sql: Sql;
+let ipc: IPC;
 const preload = path.join(__dirname, '../preload/index.js');
 const indexHtml = path.join(RENDERER_DIST, 'index.html');
 
@@ -110,18 +113,12 @@ const installExtensions = async () => {
 
 app.whenReady().then(async () => {
   await createWindow();
-  // 安装浏览器插件 （mac 上出错了）
+  console.log('isDevelopment', isDevelopment);
+  // 安装浏览器插件 （mac 上出错了, 请求不到插件）
   // if (isDevelopment) await installExtensions();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const
-  let db = new Database();
-
-  await db.createTable(`
-  CREATE TABLE IF NOT EXISTS user (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT,
-    age INTEGER
-  )
-  `);
+  sql = Sql.getInstance();
+  if (win) ipc = new IPC(win, sql);
 });
 
 app.on('window-all-closed', () => {

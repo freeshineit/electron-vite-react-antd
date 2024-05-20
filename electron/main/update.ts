@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/return-await */
 import { app, ipcMain } from 'electron';
 import { createRequire } from 'node:module';
 import type { ProgressInfo, UpdateDownloadedEvent, UpdateInfo } from 'electron-updater';

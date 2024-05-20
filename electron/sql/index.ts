@@ -1,46 +1,43 @@
 /* eslint-disable @typescript-eslint/promise-function-async */
+import { app } from 'electron';
 import sqlite3 from 'sqlite3';
 import path from 'path';
 import fse from 'fs-extra';
-// import { app } from 'electron';
 import { ENV_CONFIG } from '../env_config';
 
+const TAG = '[sqlite3]';
 /**
  * @description 数据库操作 (VSCode 可以安装对应的插件访问数据库)
  */
-class Database {
-  private static _instance: sqlite3.Database;
+class Sql {
+  private static _instance: Sql;
+  db: sqlite3.Database;
 
   public static getInstance() {
-    if (Database._instance) {
-      return Database._instance;
-    }
-
-    const DB_PATH = path.resolve(process.cwd(), `./config/${ENV_CONFIG.DBConfig.path}`);
-
-    if (!fse.existsSync(DB_PATH)) {
-      fse.ensureFileSync(DB_PATH);
-    }
-
-    console.log('DB_PATH', DB_PATH);
-
-    Database._instance = new sqlite3.Database(DB_PATH, (err) => {
-      if (err) {
-        console.error(err.message);
-      }
-      console.log('Connected to the database.');
-    });
+    return (this._instance ??= new Sql());
   }
 
   constructor() {
-    Database.getInstance();
+    const DB_PATH = path.resolve(process.cwd(), `./config/${ENV_CONFIG.DBConfig.path}`);
+    console.log(TAG, 'userData', app.getPath('userData'));
+    if (!fse.existsSync(DB_PATH)) {
+      fse.ensureFileSync(DB_PATH);
+    }
+    console.log(TAG, 'DB_PATH', DB_PATH);
+
+    this.db = new sqlite3.Database(DB_PATH, (err) => {
+      if (err) {
+        console.error(TAG, err.message);
+      }
+      console.log(TAG, 'Connected to the database.');
+    });
   }
 
   open() {
     return new Promise<void>((resolve) => {
-      Database._instance.serialize(() => {
-        Database._instance.run('PRAGMA foreign_keys = ON');
-        console.log('Connected to the database.');
+      this.db.serialize(() => {
+        this.db.run('PRAGMA foreign_keys = ON');
+        console.log(TAG, 'Connected to the database.');
         resolve();
       });
     });
@@ -54,7 +51,7 @@ class Database {
   // prettier-ignore
   createTable(sql: string) {
     return new Promise((resolve, reject) => {
-      Database._instance?.run(sql,
+      this.db?.run(sql,
         (err: Error | null) => {
           if (err) {
             reject(err);
@@ -66,13 +63,13 @@ class Database {
   }
 
   close() {
-    Database._instance?.close((err) => {
+    this.db?.close((err) => {
       if (err) {
         //
-        console.error('DB clone error: ', err.message);
+        console.error(TAG, 'DB clone error: ', err.message);
       }
     });
   }
 }
 
-export default Database;
+export default Sql;
