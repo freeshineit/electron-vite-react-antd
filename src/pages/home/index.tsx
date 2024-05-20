@@ -1,18 +1,18 @@
-import { useState } from 'react';
 import cls from 'classnames';
 // import { useSelector } from 'react-redux'
 // import { Link } from 'react-router-dom'
 import reactLogo from '@/assets/react.svg';
 import viteLogo from '@/assets/vite.svg';
 import electronLogo from '@/assets/electron.svg';
-// import { useAppDispatch } from '@/hooks/redux';
-// import { increment } from '@/store/features/counter-slice';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { increment } from '@/redux/features/counter-slice';
 import styles from './index.module.scss';
 
 const Home = () => {
-  const [count, setCount] = useState(0);
+  // const [count, setCount] = useState(0);
 
-  // const dispatch = useAppDispatch();
+  const count = useAppSelector((state) => state.counter.value);
+  const dispatch = useAppDispatch();
 
   return (
     <div className={styles.home}>
@@ -45,8 +45,7 @@ const Home = () => {
       <div className={styles.card}>
         <button
           onClick={() => {
-            setCount((count) => count + 1);
-            // dispatch(increment(count + 1));
+            dispatch(increment(count + 1));
           }}
         >
           count is {count}
@@ -55,9 +54,7 @@ const Home = () => {
           Edit <code>src/pages/home/index.tsx</code> and save to test HMR
         </p>
       </div>
-      <p className={styles['read-the-docs']}>
-        Click on the Vite、Electron、React、Ts and Redux logos to learn more
-      </p>
+      <p className={styles['read-the-docs']}>Click on the Vite、Electron、React、Ts and Redux logos to learn more</p>
       {/* <Link to="/login">login</Link> */}
     </div>
   );
