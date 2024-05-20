@@ -1,10 +1,14 @@
-import { app, BrowserWindow, shell, ipcMain } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, crashReporter } from 'electron';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
+// import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
 import path from 'path';
 import os from 'os';
 import { update } from './update';
 import Database from '../db';
+import { ENV_CONFIG } from '../env_config';
+
+const isDevelopment = process.env.NODE_ENV === 'development';
 
 // 下面两行有用 不要删除
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -47,6 +51,9 @@ let win: BrowserWindow | null = null;
 const preload = path.join(__dirname, '../preload/index.js');
 const indexHtml = path.join(RENDERER_DIST, 'index.html');
 
+// 崩溃提交日志
+crashReporter.start(ENV_CONFIG.crashReporterConfig);
+
 async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
@@ -86,8 +93,27 @@ async function createWindow() {
   update(win);
 }
 
+/**
+ * @description 安装Chrome扩展
+ * @returns
+ */
+const installExtensions = async () => {
+  const installer = require('electron-devtools-installer');
+  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
+  // const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
+  for (const name of extensions) {
+    try {
+      await installer.default(installer[name]);
+    } catch (e: any) {
+      console.log(`Error installing ${name} extension: ${e.message}`);
+    }
+  }
+};
+
 app.whenReady().then(async () => {
-  createWindow();
+  await createWindow();
+  // 安装浏览器插件 （mac 上出错了）
+  // if (isDevelopment) await installExtensions();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const
   let db = new Database();
 
