@@ -1,8 +1,8 @@
 import React from 'react';
 import { createBrowserRouter } from 'react-router-dom';
-
 // layout
 import Layout from '@/components/Layout';
+import Error404 from '@/pages/error/404';
 
 // page
 // import Home from '@/page/home/home'
@@ -46,10 +46,10 @@ export const router = createBrowserRouter(
         // },
       ],
     },
-    // {
-    //   path: "*",
-    //   element: <Error404 />,
-    // },
+    {
+      path: '*',
+      element: <Error404 />,
+    },
   ],
   {
     basename: '/',
