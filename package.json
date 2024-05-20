@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "electron-updater": "^6.1.8",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "5.1.6"
   },
   "devDependencies": {
     "@ant-design/icons": "^5.3.6",
