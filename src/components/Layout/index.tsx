@@ -3,7 +3,7 @@ import cls from 'classnames';
 import style from './index.module.scss';
 // import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 // import { fetchMeSync, selectMe } from "@/redux/features/me-slice";
-import Header from './Header';
+import HeaderBar from './HeaderBar';
 import Content from './Main';
 import Footer from './Footer';
 
@@ -34,7 +34,7 @@ const Layout = () => {
 
   return (
     <div className={cls(style.layout, '__layout')}>
-      <Header />
+      <HeaderBar />
       <Content />
       <Footer />
     </div>

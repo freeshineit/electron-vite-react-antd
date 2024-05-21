@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain, crashReporter } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, crashReporter, Menu } from 'electron';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 // import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
@@ -10,6 +10,8 @@ import IPC from '../ipc';
 import { ENV_CONFIG } from '../env_config';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
+
+const isDarwin = process.platform !== 'darwin';
 
 // 下面两行有用 不要删除
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -59,6 +61,10 @@ async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
     icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
+    frame: false,
+    titleBarStyle: isDarwin ? 'hidden' : undefined,
+    useContentSize: true,
+    autoHideMenuBar: true,
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
@@ -112,6 +118,17 @@ const installExtensions = async () => {
 };
 
 app.whenReady().then(async () => {
+  if (isDarwin) {
+    Menu.setApplicationMenu(Menu.buildFromTemplate([]));
+  } else {
+    Menu.setApplicationMenu(null);
+  }
+
+  // hide menu for Mac
+  // if (isDarwin) {
+  //   app.dock.hide();
+  // }
+
   await createWindow();
   console.log('isDevelopment', isDevelopment);
   // 安装浏览器插件 （mac 上出错了, 请求不到插件）
@@ -123,7 +140,7 @@ app.whenReady().then(async () => {
 
 app.on('window-all-closed', () => {
   win = null;
-  if (process.platform !== 'darwin') {
+  if (isDarwin) {
     app.quit();
   }
 });
