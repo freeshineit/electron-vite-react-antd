@@ -15,7 +15,6 @@
     "dev": "vite",
     "build": "tsc && vite build && electron-builder",
     "preview": "vite preview",
-    "preinstall": "npx only-allow pnpm",
     "pree2e": "vite build --mode=test",
     "e2e": "playwright test",
     "fix": "eslint --fix src/**/*.ts --fix  src/**/*.tsx",
