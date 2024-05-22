@@ -3,7 +3,7 @@
  */
 export const ENV_CONFIG = {
   DBConfig: {
-    path: 'db.db',
+    path: '/data/db.db',
   },
   loggerConfig: {},
   crashReporterConfig: {

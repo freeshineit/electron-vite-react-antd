@@ -38,6 +38,9 @@ jobs:
       - name: Install Dependencies
         run: pnpm install
 
+      - name: Install Dependencies
+        run: pnpm run rebuild
+
       - name: Build Release Files
         run: pnpm run build
         env:

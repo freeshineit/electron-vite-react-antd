@@ -19,13 +19,16 @@
     "e2e": "playwright test",
     "fix": "eslint --fix src/**/*.ts --fix  src/**/*.tsx",
     "lint": "eslint --ext .ts,tsx,.js,.jsx ./src",
-    "fmt": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss,cjs}\""
+    "fmt": "prettier --write \"**/*.{ts,tsx,js,jsx,json,css,scss,cjs}\"",
+    "rebuild": "electron-rebuild -f -w better-sqlite3"
   },
   "dependencies": {
+    "better-sqlite3": "9.6.0",
     "electron-updater": "^6.1.8"
   },
   "devDependencies": {
     "@ant-design/icons": "^5.3.7",
+    "@electron/rebuild": "^3.6.0",
     "@playwright/test": "^1.44.0",
     "@reduxjs/toolkit": "^2.2.3",
     "@types/better-sqlite3": "^7.6.10",
@@ -35,7 +38,6 @@
     "antd": "^5.17.2",
     "autoprefixer": "^10.4.19",
     "axios": "^1.6.8",
-    "better-sqlite3": "9.6.0",
     "classnames": "^2.5.1",
     "cross-env": "^7.0.3",
     "electron": "^22.3.27",
