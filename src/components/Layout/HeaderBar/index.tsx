@@ -24,10 +24,13 @@ const HeaderBar = () => {
     <div className={cls(styles.header, '__header')}>
       <div className={styles.left}>
         <Link to="/">Home Page</Link>
+        &nbsp;|&nbsp;
         <div>
           <Link to="/login">Login</Link>
           &nbsp;|&nbsp;
           <Link to="./register">Register</Link>
+          &nbsp;|&nbsp;
+          <Link to="./profile">Profile</Link>
         </div>
       </div>
       <div className={styles.right}>

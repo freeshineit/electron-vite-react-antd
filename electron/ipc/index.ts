@@ -43,8 +43,10 @@ class IPC {
       // }
     });
 
-    ipcMain.handle(IPC_CONST.WINDOW_CLOSE, async () => {
+    ipcMain.handle(IPC_CONST.WINDOW_CLOSE, async (event: any) => {
+      event.preventDefault();
       this._win.close();
+      // this._win.hide();
     });
   }
 }

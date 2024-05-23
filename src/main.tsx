@@ -8,7 +8,7 @@ import { RouterProvider } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import { Provider } from 'react-redux';
 // import ErrorBoundary from "@/components/ErrorBoundary";
-import Loading from '@/components/common/Loading';
+// import Loading from '@/components/common/Loading';
 import { store } from './redux';
 import { router } from './router';
 import './styles/common.scss';
@@ -24,9 +24,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       //   token: $__THEME__$, // vite global antd5 theme
       // }}
       >
-        <React.Suspense fallback={<Loading />}>
-          <RouterProvider router={router} />
-        </React.Suspense>
+        <RouterProvider router={router} />
       </ConfigProvider>
     </Provider>
   </React.StrictMode>,
