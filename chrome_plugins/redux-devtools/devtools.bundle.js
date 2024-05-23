@@ -1,0 +1,1 @@
+"use strict";(()=>{function n(e){chrome.devtools.panels.create("Redux","img/logo/scalable.png",e,function(){})}chrome.runtime.getBackgroundPage?chrome.runtime.getBackgroundPage(e=>{n(e?"window.html":"devpanel.html")}):n("devpanel.html");})();

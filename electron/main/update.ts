@@ -1,11 +1,11 @@
 /* eslint-disable @typescript-eslint/return-await */
-import { app, ipcMain } from 'electron';
+import { app, ipcMain, type BrowserWindow, type IpcMainInvokeEvent } from 'electron';
 import { createRequire } from 'node:module';
 import type { ProgressInfo, UpdateDownloadedEvent, UpdateInfo } from 'electron-updater';
 
 const { autoUpdater } = createRequire(import.meta.url)('electron-updater');
 
-export function update(win: Electron.BrowserWindow) {
+export function update(win: BrowserWindow) {
   // When set to false, the update download will be triggered through the API
   autoUpdater.autoDownload = false;
   autoUpdater.disableWebInstaller = false;
@@ -45,7 +45,7 @@ export function update(win: Electron.BrowserWindow) {
   });
 
   // Start downloading and feedback on progress
-  ipcMain.handle('start-download', (event: Electron.IpcMainInvokeEvent) => {
+  ipcMain.handle('start-download', (event: IpcMainInvokeEvent) => {
     startDownload(
       (error, progressInfo) => {
         if (error) {

@@ -1,4 +1,4 @@
-import { app, BrowserWindow, shell, ipcMain, crashReporter, Menu } from 'electron';
+import { app, BrowserWindow, shell, ipcMain, crashReporter, Menu, session } from 'electron';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
 // import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
@@ -79,7 +79,7 @@ async function createWindow() {
   if (VITE_DEV_SERVER_URL) {
     // #298
     win.loadURL(VITE_DEV_SERVER_URL);
-    if (process.env.NODE_ENV === 'development') {
+    if (isDevelopment) {
       // Open devTool if the app is not packaged
       win.webContents.openDevTools();
     }
@@ -107,16 +107,8 @@ async function createWindow() {
  * @returns
  */
 const installExtensions = async () => {
-  const installer = require('electron-devtools-installer');
-  const extensions = ['REACT_DEVELOPER_TOOLS', 'REDUX_DEVTOOLS'];
-  // const forceDownload = !!process.env.UPGRADE_EXTENSIONS;
-  for (const name of extensions) {
-    try {
-      await installer.default(installer[name]);
-    } catch (e: any) {
-      console.log(`Error installing ${name} extension: ${e.message}`);
-    }
-  }
+  const reactDevtoolsPath = path.join(__dirname, '../../chrome_plugins/redux-devtools');
+  await session.defaultSession.loadExtension(reactDevtoolsPath, { allowFileAccess: true });
 };
 
 app.whenReady().then(async () => {
@@ -134,7 +126,7 @@ app.whenReady().then(async () => {
   await createWindow();
   console.log('isDevelopment', isDevelopment);
   // 安装浏览器插件 （mac 上出错了, 请求不到插件）
-  // if (isDevelopment) await installExtensions();
+  if (isDevelopment) await installExtensions();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const
   sql = Sql.getInstance();
   if (win) ipc = new IPC(win, sql);
