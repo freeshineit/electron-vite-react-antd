@@ -65,6 +65,8 @@ async function createWindow() {
     titleBarStyle: isDarwin ? 'hidden' : undefined,
     useContentSize: true,
     autoHideMenuBar: true,
+    minHeight: 400,
+    minWidth: 600,
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
