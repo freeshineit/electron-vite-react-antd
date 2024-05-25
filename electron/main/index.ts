@@ -8,6 +8,7 @@ import { update } from './update';
 import Sql from '../sql';
 import IPC from '../ipc';
 import { ENV_CONFIG } from '../env_config';
+import logger from '../logger';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
 
@@ -56,6 +57,11 @@ const indexHtml = path.join(RENDERER_DIST, 'index.html');
 
 // 崩溃提交日志
 crashReporter.start(ENV_CONFIG.crashReporterConfig);
+
+process.on('uncaughtException', (err) => {
+  // 监控崩溃
+  logger.error(err);
+});
 
 async function createWindow() {
   win = new BrowserWindow({
@@ -126,7 +132,7 @@ app.whenReady().then(async () => {
   // }
 
   await createWindow();
-  console.log('isDevelopment', isDevelopment);
+  logger.log('isDevelopment', isDevelopment);
   // 安装浏览器插件 （mac 上出错了, 请求不到插件）
   if (isDevelopment) await installExtensions();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const

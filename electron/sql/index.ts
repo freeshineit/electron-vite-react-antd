@@ -2,6 +2,7 @@ import Database from 'better-sqlite3';
 import path from 'path';
 import fse from 'fs-extra';
 import { ENV_CONFIG } from '../env_config';
+import logger from '../logger';
 
 const TAG = '[sqlite3]';
 
@@ -19,7 +20,7 @@ class Sql {
       fse.ensureFileSync(DB_PATH);
     }
 
-    console.log(TAG, 'DB_PATH', DB_PATH);
+    logger.log(TAG, 'DB_PATH', DB_PATH);
     this.db = new Database(DB_PATH, {});
     this.db.pragma('journal_mode = WAL');
   }

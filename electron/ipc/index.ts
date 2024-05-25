@@ -1,4 +1,5 @@
 import { type BrowserWindow, ipcMain } from 'electron';
+import logger from '../logger';
 import type Sql from '../sql';
 import IPC_CONST from '../../constant/ipc';
 
@@ -25,14 +26,14 @@ class IPC {
   }
 
   private _window() {
-    console.log(TAG, 'window');
+    logger.log(TAG, 'window');
     //
     ipcMain.handle(IPC_CONST.WINDOW_MIN, async () => {
       this._win.minimize();
     });
 
     ipcMain.handle(IPC_CONST.WINDOW_FULL_SCREEN, async () => {
-      console.log(TAG, 'window fullScreen', this._win.fullScreen);
+      logger.log(TAG, 'window fullScreen', this._win.fullScreen);
       this._win.setFullScreen(!this._win.fullScreen);
 
       // if (this._win.isMaximized()) {

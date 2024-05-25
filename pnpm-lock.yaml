@@ -58,6 +58,9 @@ devDependencies:
   electron-builder:
     specifier: ^24.13.3
     version: 24.13.3(electron-builder-squirrel-windows@24.13.3)
+  electron-log:
+    specifier: ^5.1.5
+    version: 5.1.5
   eslint:
     specifier: ^8.57.0
     version: 8.57.0
@@ -2721,6 +2724,11 @@ packages:
     transitivePeerDependencies:
       - electron-builder-squirrel-windows
       - supports-color
+    dev: true
+
+  /electron-log@5.1.5:
+    resolution: {integrity: sha512-vuq10faUAxRbILgQx7yHoMObKZDEfj7hMSZrJPsVrDNeCpV/HN11dU7QuY4UDUe055pzBxhSCB3m0+6D3Aktjw==}
+    engines: {node: '>= 14'}
     dev: true
 
   /electron-publish@24.13.1:
