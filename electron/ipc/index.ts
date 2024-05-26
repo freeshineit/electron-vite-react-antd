@@ -20,13 +20,12 @@ class IPC {
   }
 
   private _init() {
-    ipcMain.on('get-data', (event, arg) => {
-      //   event.returnValue = 'pong';
-    });
+    ipcMain.on('get-data', (event, arg) => {});
   }
 
   private _window() {
     logger.log(TAG, 'window');
+
     //
     ipcMain.handle(IPC_CONST.WINDOW_MIN, async () => {
       this._win.minimize();
@@ -37,10 +36,13 @@ class IPC {
       this._win.setFullScreen(!this._win.fullScreen);
     });
 
-    ipcMain.handle(IPC_CONST.WINDOW_CLOSE, async (event: any) => {
-      event.preventDefault();
+    ipcMain.handle(IPC_CONST.WINDOW_CLOSE, async () => {
+      // if (isDarwin) {
+      //   this._win.hide();
+      // } else {
+      logger.log(TAG, 'window close');
       this._win.close();
-      // this._win.hide();
+      // }
     });
 
     //

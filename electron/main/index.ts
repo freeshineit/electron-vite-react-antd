@@ -69,8 +69,8 @@ async function createWindow() {
     titleBarStyle: undefined,
     useContentSize: true,
     autoHideMenuBar: true,
-    minHeight: 400,
-    minWidth: 600,
+    minHeight: 600,
+    minWidth: 800,
     webPreferences: {
       preload,
       // Warning: Enable nodeIntegration and disable contextIsolation is not secure in production
