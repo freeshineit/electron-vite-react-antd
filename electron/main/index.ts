@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { app, BrowserWindow, shell, ipcMain, crashReporter, Menu, session } from 'electron';
 import { createRequire } from 'module';
 import { fileURLToPath } from 'url';
@@ -9,10 +10,7 @@ import Sql from '../sql';
 import IPC from '../ipc';
 import { ENV_CONFIG } from '../env_config';
 import logger from '../logger';
-
-const isDevelopment = process.env.NODE_ENV === 'development';
-
-const isDarwin = process.platform !== 'darwin';
+import { isDevelopment, isDarwin } from '../utils';
 
 // 下面两行有用 不要删除
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -68,7 +66,7 @@ async function createWindow() {
     title: 'Main window',
     icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
     frame: false,
-    titleBarStyle: isDarwin ? 'hidden' : undefined,
+    titleBarStyle: undefined,
     useContentSize: true,
     autoHideMenuBar: true,
     minHeight: 400,
@@ -140,11 +138,21 @@ app.whenReady().then(async () => {
   if (win) ipc = new IPC(win, sql);
 });
 
+// 确保在应用退出时关闭数据库连接
+app.on('before-quit', () => {
+  sql?.db?.close();
+});
+
 app.on('window-all-closed', () => {
   win = null;
   if (isDarwin) {
     app.quit();
   }
+
+  if (sql?.db) {
+    sql.db.close();
+  }
+  sql = null!;
 });
 
 app.on('second-instance', () => {

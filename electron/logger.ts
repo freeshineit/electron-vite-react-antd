@@ -5,12 +5,17 @@
 
 import * as logger from 'electron-log';
 import path from 'path';
+import { isDevelopment } from './utils';
+import { ENV_CONFIG } from './env_config';
 
 function setLogger() {
-  // logger.transports.file.fileName = '/Evra/log.log';
-  logger.transports.file.format = '[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] [main] {text}';
-  logger.transports.file.level = process.env.NODE_ENV === 'development' ? 'silly' : 'verbose';
-  logger.transports.file.resolvePathFn = () => path.resolve(process.cwd(), './logs/log.log');
+  logger.transports.file.fileName = ENV_CONFIG.loggerConfig.fileName;
+  logger.transports.file.format = ENV_CONFIG.loggerConfig.format;
+  if (isDevelopment) {
+    logger.transports.file.level = process.env.NODE_ENV === 'development' ? 'silly' : 'verbose';
+    logger.transports.file.resolvePathFn = () => path.resolve(process.cwd(), './logs/log.log');
+  }
+
   logger.initialize();
 }
 

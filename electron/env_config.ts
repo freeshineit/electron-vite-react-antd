@@ -3,10 +3,10 @@
  */
 export const ENV_CONFIG = {
   DBConfig: {
-    path: '/data/db.db',
+    fileName: 'dta.db',
   },
   loggerConfig: {
-    fileName: 'react-vite/log.log',
+    fileName: 'log.log',
     format: '[{y}-{m}-{d} {h}:{i}:{s}.{ms}] [{level}] {text}',
   },
   crashReporterConfig: {
