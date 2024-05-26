@@ -5,6 +5,7 @@ import { fileURLToPath } from 'url';
 // import installExtension, { REDUX_DEVTOOLS } from 'electron-devtools-installer';
 import path from 'path';
 import os from 'os';
+import type BetterSqlite3 from 'better-sqlite3';
 import { update } from './update';
 import Sql from '../sql';
 import IPC from '../ipc';
@@ -48,7 +49,7 @@ if (!app.requestSingleInstanceLock()) {
 }
 
 let win: BrowserWindow | null = null;
-let sql: Sql;
+let sql: BetterSqlite3.Database;
 let ipc: IPC;
 const preload = path.join(__dirname, '../preload/index.js');
 const indexHtml = path.join(RENDERER_DIST, 'index.html');
@@ -113,7 +114,7 @@ async function createWindow() {
  * @returns
  */
 const installExtensions = async () => {
-  const reactDevtoolsPath = path.join(__dirname, '../../chrome_plugins/redux-devtools');
+  const reactDevtoolsPath = path.join(__dirname, '../../extensions/redux-devtools');
   await session.defaultSession.loadExtension(reactDevtoolsPath, { allowFileAccess: true });
 };
 
@@ -134,13 +135,13 @@ app.whenReady().then(async () => {
   // 安装浏览器插件 （mac 上出错了, 请求不到插件）
   if (isDevelopment) await installExtensions();
   // eslint-disable-next-line @typescript-eslint/no-unused-vars, prefer-const
-  sql = Sql.getInstance();
+  sql = Sql.getInstance().db;
   if (win) ipc = new IPC(win, sql);
 });
 
 // 确保在应用退出时关闭数据库连接
 app.on('before-quit', () => {
-  sql?.db?.close();
+  sql?.close?.();
 });
 
 app.on('window-all-closed', () => {
@@ -149,9 +150,7 @@ app.on('window-all-closed', () => {
     app.quit();
   }
 
-  if (sql?.db) {
-    sql.db.close();
-  }
+  sql?.close?.();
   sql = null!;
 });
 

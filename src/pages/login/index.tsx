@@ -5,6 +5,7 @@ import { UserOutlined, LockOutlined, SafetyOutlined } from '@ant-design/icons';
 // import FE from '@/assets/FE.png';
 
 import styles from './login.module.scss';
+import IPC_CONST from '../../../constant/ipc';
 
 const Login = () => {
   //   const history = useHistory();
@@ -35,6 +36,10 @@ const Login = () => {
     (values: any) => {
       setLoading(true);
       values.captcha_id = captchaID;
+
+      window.ipcRenderer.invoke(IPC_CONST.DB_PERSON_INSERT, { name: 'ShineShao', age: 18 });
+
+      setLoading(false);
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
       //   postLogin(values)

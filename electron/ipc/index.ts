@@ -1,7 +1,8 @@
 import { type BrowserWindow, ipcMain } from 'electron';
+import type BetterSqlite3 from 'better-sqlite3';
 import logger from '../logger';
-import type Sql from '../sql';
 import IPC_CONST from '../../constant/ipc';
+import ipcSql from './sql';
 
 const TAG = '[Main IPC]';
 
@@ -12,11 +13,12 @@ class IPC {
   private readonly _win;
   private readonly _db;
 
-  constructor(win: BrowserWindow, db: Sql) {
+  constructor(win: BrowserWindow, db: BetterSqlite3.Database) {
     this._win = win;
     this._db = db;
     this._init();
     this._window();
+    this._sql();
   }
 
   private _init() {
@@ -53,6 +55,10 @@ class IPC {
         this._win.maximize();
       }
     });
+  }
+
+  private _sql() {
+    ipcSql(this._db);
   }
 }
 
