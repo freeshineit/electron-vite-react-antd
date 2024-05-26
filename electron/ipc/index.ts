@@ -35,19 +35,21 @@ class IPC {
     ipcMain.handle(IPC_CONST.WINDOW_FULL_SCREEN, async () => {
       logger.log(TAG, 'window fullScreen', this._win.fullScreen);
       this._win.setFullScreen(!this._win.fullScreen);
-
-      // if (this._win.isMaximized()) {
-      //   // this._win.fullScreen()
-      //   // this._win.unmaximize();
-      // } else {
-      //   this._win.maximize();
-      // }
     });
 
     ipcMain.handle(IPC_CONST.WINDOW_CLOSE, async (event: any) => {
       event.preventDefault();
       this._win.close();
       // this._win.hide();
+    });
+
+    //
+    ipcMain.handle(IPC_CONST.WINDOW_MAXIMIZE, () => {
+      if (this._win.isMaximized()) {
+        this._win.unmaximize();
+      } else {
+        this._win.maximize();
+      }
     });
   }
 }

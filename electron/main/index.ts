@@ -118,11 +118,11 @@ const installExtensions = async () => {
 };
 
 app.whenReady().then(async () => {
-  if (isDarwin) {
-    Menu.setApplicationMenu(Menu.buildFromTemplate([]));
-  } else {
-    Menu.setApplicationMenu(null);
-  }
+  // if (isDarwin) {
+  //   Menu.setApplicationMenu(Menu.buildFromTemplate([]));
+  // } else {
+  Menu.setApplicationMenu(null);
+  // }
 
   // hide menu for Mac
   // if (isDarwin) {

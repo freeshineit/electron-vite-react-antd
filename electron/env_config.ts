@@ -3,7 +3,7 @@
  */
 export const ENV_CONFIG = {
   DBConfig: {
-    fileName: 'dta.db',
+    fileName: 'data.db',
   },
   loggerConfig: {
     fileName: 'log.log',
