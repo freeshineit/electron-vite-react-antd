@@ -30,7 +30,7 @@
     "@vitejs/plugin-react": "^4.2.1",
     "autoprefixer": "^10.4.19",
     "cross-env": "^7.0.3",
-    "electron": "^29.1.1",
+    "electron": "^30.0.9",
     "electron-builder": "^24.13.3",
     "only-allow": "^1.2.1",
     "postcss": "^8.4.38",
