@@ -24,6 +24,8 @@ release
 *.sln
 *.sw?
 
+data
+
 #lockfile
 /test-results/
 /playwright-report/
