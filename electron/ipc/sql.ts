@@ -4,7 +4,7 @@ import IPC_CONST from '../../constant/ipc';
 import logger from '../logger';
 import Person, { type IPerson } from '../sql/person';
 
-const TAG = '[Main SQL IPC] ';
+const TAG = '[SQL IPC] ';
 
 function ipcSql(db: BetterSqlite3.Database) {
   const person = new Person(db);
