@@ -65,11 +65,12 @@ process.on('uncaughtException', (err) => {
 async function createWindow() {
   win = new BrowserWindow({
     title: 'Main window',
-    icon: path.join(process.env.VITE_PUBLIC, 'favicon.ico'),
+    icon: path.join(__dirname, '../../build/icon.png'),
     frame: false,
-    titleBarStyle: undefined,
+    titleBarStyle: 'hidden',
     useContentSize: true,
     autoHideMenuBar: true,
+    transparent: false,
     minHeight: 600,
     minWidth: 800,
     webPreferences: {

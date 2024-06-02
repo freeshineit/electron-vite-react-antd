@@ -33,8 +33,8 @@ const HeaderBar = () => {
   }, []);
 
   return (
-    <div className={cls(styles.header, '__header')} onDoubleClick={handleDoubleClick}>
-      <div className={styles.left}>
+    <div className={cls('drag', styles.header, '__header')} onDoubleClick={handleDoubleClick}>
+      <div className={cls(styles.left, 'drag-none')}>
         <Link to="/">Home Page</Link>
         &nbsp;|&nbsp;
         <div>
@@ -45,7 +45,7 @@ const HeaderBar = () => {
           <Link to="./profile">Profile</Link>
         </div>
       </div>
-      <div className={styles.right}>
+      <div className={cls(styles.right, 'drag-none')}>
         <span className={styles.winIcon} onClick={handleMin}>
           <MinusOutlined />
         </span>

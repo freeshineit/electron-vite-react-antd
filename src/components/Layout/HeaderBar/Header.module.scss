@@ -7,7 +7,6 @@
   // padding: 0 20px;
   height: $header-bar-height;
   min-height: $header-bar-height;
-  -webkit-app-region: drag;
   cursor: pointer;
   position: fixed;
   top: 0;
@@ -29,6 +28,7 @@
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  -webkit-app-region: none;
 
   &:hover {
     background-color: #000;

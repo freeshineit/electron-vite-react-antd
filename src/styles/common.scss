@@ -29,3 +29,11 @@ html {
   height: 100%;
   height: 100vh;
 }
+
+.drag {
+  -webkit-app-region: drag;
+}
+
+.drag-none {
+  -webkit-app-region: none;
+}
