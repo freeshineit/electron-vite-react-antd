@@ -17,11 +17,12 @@
     "jsx": "react-jsx",
     "baseUrl": "./",
     "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    },
+      "@/*": ["src/*"]
+    }
   },
-  "include": ["src", "electron"],
+  "ts-node": {
+    "esm": true
+  },
+  "include": ["src", "electron", "constant", "services"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
